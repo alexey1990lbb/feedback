@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Создать обращение{% endblock %}
+{% block content %}
+<h2>Создать новое обращение</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Отправить</button>
+</form>
+<a href="{% url 'home' %}">Отмена</a>
+<a href="{% url 'all_feedback' %}">Все отзывы</a>
+{% endblock %}

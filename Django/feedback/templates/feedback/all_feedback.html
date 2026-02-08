@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load post_extras %}
+{% block title %}Все отзывы{% endblock %}
+{% block content %}
+<h2>Все отзывы</h2>
+{% for feedback in feedbacks %}
+<div class="feedback-card">
+    <h3>{{ feedback.name }}</h3>
+    <p>{{ feedback.message }}</p>
+    <small>{{ feedback.created_at|smart_time }}</small>
+</div>
+{% empty %}
+    <p>Отзывов пока нет</p>
+{% endfor %}
+    <a href="{% url 'home' %}">Главная</a>
+    <a href="{% url 'feedback_form' %}">Создать отзыв</a>
+{% endblock %}
