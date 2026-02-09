@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Главная</a>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Вход</a>
+        <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+</header>
 <main>{% block content %}{% endblock %}</main>
 </body>
 </html>

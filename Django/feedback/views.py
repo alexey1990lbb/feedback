@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import FeedbackCreateForm
 from .models import Feedback
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -18,6 +19,7 @@ def feedback_form(request):
         form = FeedbackCreateForm()
     return render(request, 'feedback/feedback_form.html', {'form': form})
 
+@login_required
 def all_feedback(request):
     '''Показать все отзывы'''
     feedbacks = Feedback.objects.all().order_by('-created_at')
